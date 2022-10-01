@@ -1,9 +1,9 @@
 Sub tickerCounter()
 
-    ' First just get the ticker and total stock volume to work on a single wkst- check
-    ' 2nd, get the yearly change to work
+    ' First just get the ticker and total stock volume to work on a single wkst- CHECK
+    ' 2nd, get the yearly change to work and formatted- CHECK
     ' 3rd, get yearly change to the right color format
-    ' 4th, get percent change to work
+    ' 4th, get percent change to work - CHECK
     ' 5th, get it to work on all the wksts
     ' Move onto bonus section if time
     
@@ -58,14 +58,20 @@ Sub tickerCounter()
             ' Set the closing stock price for the last day of the year
             year_close = Cells(i, 6).Value
             
-            ' Calculate yearly chang in stock price and save to var year_change
+            ' Calculate yearly change in stock price and save to var year_change
             year_change = year_close - year_open
+            
+            ' Calculate percent change in stock price and save to var perc_change then format as perc
+            perc_change = year_change / year_open
             
             ' Print the Ticker Initials in the Summary Table
             Range("I" & Summary_Table_Row).Value = ticker
             
             ' Print the Yearly Change in the Summary Table
             Range("J" & Summary_Table_Row).Value = year_change
+            
+            ' Print the Percent Change in the Summary Table
+            Range("K" & Summary_Table_Row).Value = perc_change
 
             ' Print the total stock volume to the Summary Table
             Range("L" & Summary_Table_Row).Value = total_vol
@@ -89,5 +95,9 @@ Sub tickerCounter()
 
     Next i
 
+    ' Format Percent Change as two decimals places and %
+    Range("K2:K" & lastRow).NumberFormat = "0.00%"
+    
+    
 End Sub
 
